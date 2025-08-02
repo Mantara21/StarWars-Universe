@@ -9,4 +9,7 @@ public enum Rank {
     MASTER,
     BATTLE_MASTER,
     GRAND_MASTER;
+    public int getHierarchyLevel() {
+        return this.ordinal();
+    }
 }

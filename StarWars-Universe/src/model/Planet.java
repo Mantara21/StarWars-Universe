@@ -27,4 +27,13 @@ public class Planet {
     public String toString() {
         return name + " with " + jedis.size() + " jedis.";
     }
+    public List<Jedi> getSortedJedis() {
+        return jedis.stream()
+                .sorted((j1, j2) -> {
+                    int rankCompare = Integer.compare(j1.getRank().getHierarchyLevel(), j2.getRank().getHierarchyLevel());
+                    if (rankCompare != 0) return rankCompare;
+                    return j1.getName().compareToIgnoreCase(j2.getName());
+                })
+                .toList();
+    }
 }
