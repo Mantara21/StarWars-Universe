@@ -53,6 +53,28 @@ public class CommandHandler {
             case "help":
                 printHelp();
                 break;
+            case "add_planet":
+                if (parts.length >= 2) {
+                    universe.addPlanet(parts[1]);
+                } else {
+                    System.out.println("Usage: add_planet <planet_name>");
+                }
+                break;
+            case "print":
+                if (parts.length >= 2) {
+                    var planet = universe.getPlanet(parts[1]);
+                    if (planet != null) {
+                        System.out.println("Planet: " + planet.getName());
+                        for (var jedi : planet.getSortedJedis()) {
+                            System.out.println(jedi);
+                        }
+                    } else {
+                        System.out.println("Planet not found.");
+                    }
+                } else {
+                    System.out.println("Usage: print <planet_name>");
+                }
+                break;
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
         }
