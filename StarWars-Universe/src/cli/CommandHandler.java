@@ -75,6 +75,20 @@ public class CommandHandler {
                     System.out.println("Usage: print <planet_name>");
                 }
                 break;
+            case "create_jedi":
+                if (parts.length >= 7) {
+                    String planet = parts[1];
+                    String name = parts[2];
+                    String rank = parts[3];
+                    int age = Integer.parseInt(parts[4]);
+                    String color = parts[5];
+                    double strength = Double.parseDouble(parts[6]);
+                    universe.createJedi(planet, name, rank, age, color, strength);
+                } else {
+                    System.out.println("Usage: create_jedi <planet> <name> <rank> <age> <color> <strength>");
+                }
+                break;
+
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
         }
