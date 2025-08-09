@@ -55,4 +55,22 @@ public class StarWarsUniverse {
         System.out.println("Jedi created successfully.");
         return true;
     }
+    public boolean removeJedi(String name, String planetName) {
+        Planet planet = planets.get(planetName);
+        if (planet == null) {
+            System.out.println("Planet not found.");
+            return false;
+        }
+
+        for (Jedi j : planet.getJedis()) {
+            if (j.getName().equalsIgnoreCase(name)) {
+                planet.removeJedi(j);
+                System.out.println("Jedi removed.");
+                return true;
+            }
+        }
+        System.out.println("Jedi not found on this planet.");
+        return false;
+    }
+
 }

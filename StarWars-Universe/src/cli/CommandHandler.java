@@ -88,6 +88,14 @@ public class CommandHandler {
                     System.out.println("Usage: create_jedi <planet> <name> <rank> <age> <color> <strength>");
                 }
                 break;
+            case "removejedi":
+                if (parts.length >= 3) {
+                    universe.removeJedi(parts[1], parts[2]);
+                } else {
+                    System.out.println("Usage: removeJedi <jedi_name> <planet_name>");
+                }
+                break;
+
 
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
