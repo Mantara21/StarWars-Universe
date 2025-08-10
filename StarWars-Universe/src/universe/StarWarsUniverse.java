@@ -73,4 +73,43 @@ public class StarWarsUniverse {
         return false;
     }
 
+    public void promoteJedi(String name, double multiplier) {
+        for (Planet p : planets.values()) {
+            for (Jedi j : p.getJedis()) {
+                if (j.getName().equalsIgnoreCase(name)) {
+                    Rank[] ranks = Rank.values();
+                    int current = j.getRank().ordinal();
+                    if (current < ranks.length - 1) {
+                        j.setRank(ranks[current + 1]);
+                        j.setStrength(j.getStrength() + multiplier * j.getStrength());
+                        System.out.println("Jedi promoted.");
+                    } else {
+                        System.out.println("Jedi is already GRAND_MASTER.");
+                    }
+                    return;
+                }
+            }
+        }
+        System.out.println("Jedi not found.");
+    }
+    public void demoteJedi(String name, double multiplier) {
+        for (Planet p : planets.values()) {
+            for (Jedi j : p.getJedis()) {
+                if (j.getName().equalsIgnoreCase(name)) {
+                    int current = j.getRank().ordinal();
+                    if (current > 0) {
+                        j.setRank(Rank.values()[current - 1]);
+                        j.setStrength(j.getStrength() - multiplier * j.getStrength());
+                        System.out.println("Jedi demoted.");
+                    } else {
+                        System.out.println("Jedi is already YOUNGLING.");
+                    }
+                    return;
+                }
+            }
+        }
+        System.out.println("Jedi not found.");
+    }
+
+
 }

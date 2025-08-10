@@ -95,7 +95,30 @@ public class CommandHandler {
                     System.out.println("Usage: removeJedi <jedi_name> <planet_name>");
                 }
                 break;
-
+            case "promote_jedi":
+                if (parts.length >= 3) {
+                    double multiplier = Double.parseDouble(parts[2]);
+                    if (multiplier <= 0) {
+                        System.out.println("Multiplier must be positive.");
+                        break;
+                    }
+                    universe.promoteJedi(parts[1], multiplier);
+                } else {
+                    System.out.println("Usage: promote_jedi <jedi_name> <multiplier>");
+                }
+                break;
+            case "demote_jedi":
+                if (parts.length >= 3) {
+                    double multiplier = Double.parseDouble(parts[2]);
+                    if (multiplier <= 0) {
+                        System.out.println("Multiplier must be positive.");
+                        break;
+                    }
+                    universe.demoteJedi(parts[1], multiplier);
+                } else {
+                    System.out.println("Usage: demote_jedi <jedi_name> <multiplier>");
+                }
+                break;
 
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
