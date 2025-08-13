@@ -119,10 +119,19 @@ public class CommandHandler {
                     System.out.println("Usage: demote_jedi <jedi_name> <multiplier>");
                 }
                 break;
+            case "get_strongest_jedi":
+                if (parts.length >= 2) {
+                    universe.getStrongestJedi(parts[1]);
+                } else {
+                    System.out.println("Usage: get_strongest_jedi <planet_name>");
+                }
+                break;
+
 
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
         }
+
     }
 
     private void printHelp() {

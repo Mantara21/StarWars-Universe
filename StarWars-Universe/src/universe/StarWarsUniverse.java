@@ -110,6 +110,24 @@ public class StarWarsUniverse {
         }
         System.out.println("Jedi not found.");
     }
+    public void getStrongestJedi(String planetName) {
+        Planet planet = planets.get(planetName);
+        if (planet == null) {
+            System.out.println("Planet not found.");
+            return;
+        }
+
+        Jedi strongest = planet.getJedis().stream()
+                .max((j1, j2) -> Double.compare(j1.getStrength(), j2.getStrength()))
+                .orElse(null);
+
+        if (strongest != null) {
+            System.out.println(strongest);
+        } else {
+            System.out.println("No jedis on this planet.");
+        }
+    }
+
 
 
 }
