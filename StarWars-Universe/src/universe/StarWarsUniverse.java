@@ -127,7 +127,36 @@ public class StarWarsUniverse {
             System.out.println("No jedis on this planet.");
         }
     }
+    public void getYoungestJedi(String planetName, String rankStr) {
+        Planet planet = planets.get(planetName);
+        if (planet == null) {
+            System.out.println("Planet not found.");
+            return;
+        }
 
+        Rank rank;
+        try {
+            rank = Rank.valueOf(rankStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rank.");
+            return;
+        }
 
+        Jedi youngest = planet.getJedis().stream()
+                .filter(j -> j.getRank() == rank)
+                .sorted((j1, j2) -> {
+                    int ageCompare = Integer.compare(j1.getAge(), j2.getAge());
+                    if (ageCompare != 0) return ageCompare;
+                    return j1.getName().compareToIgnoreCase(j2.getName());
+                })
+                .findFirst()
+                .orElse(null);
+
+        if (youngest != null) {
+            System.out.println(youngest);
+        } else {
+            System.out.println("No jedis with rank " + rank + " on this planet.");
+        }
+    }
 
 }

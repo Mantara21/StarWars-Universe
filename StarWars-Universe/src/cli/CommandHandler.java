@@ -126,7 +126,13 @@ public class CommandHandler {
                     System.out.println("Usage: get_strongest_jedi <planet_name>");
                 }
                 break;
-
+            case "get_youngest_jedi":
+                if (parts.length >= 3) {
+                    universe.getYoungestJedi(parts[1], parts[2]);
+                } else {
+                    System.out.println("Usage: get_youngest_jedi <planet_name> <rank>");
+                }
+                break;
 
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
