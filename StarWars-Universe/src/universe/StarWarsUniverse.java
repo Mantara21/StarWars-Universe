@@ -158,5 +158,64 @@ public class StarWarsUniverse {
             System.out.println("No jedis with rank " + rank + " on this planet.");
         }
     }
+    public void getMostUsedSaberColor(String planetName, String rankStr) {
+        Planet planet = planets.get(planetName);
+        if (planet == null) {
+            System.out.println("Planet not found.");
+            return;
+        }
+
+        Rank rank;
+        try {
+            rank = Rank.valueOf(rankStr.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid rank.");
+            return;
+        }
+
+        Map<String, Integer> colorCount = new HashMap<>();
+        for (Jedi j : planet.getJedis()) {
+            if (j.getRank() == rank) {
+                colorCount.put(j.getSaberColor(), colorCount.getOrDefault(j.getSaberColor(), 0) + 1);
+            }
+        }
+
+        String mostUsedColor = colorCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        if (mostUsedColor != null) {
+            System.out.println("Most used color: " + mostUsedColor);
+        } else {
+            System.out.println("No jedis with that rank.");
+        }
+    }
+    public void getMostUsedSaberColorByGrandMasters(String planetName) {
+        Planet planet = planets.get(planetName);
+        if (planet == null) {
+            System.out.println("Planet not found.");
+            return;
+        }
+
+        Map<String, Integer> colorCount = new HashMap<>();
+        for (Jedi j : planet.getJedis()) {
+            if (j.getRank() == Rank.GRAND_MASTER) {
+                colorCount.put(j.getSaberColor(), colorCount.getOrDefault(j.getSaberColor(), 0) + 1);
+            }
+        }
+
+        String mostUsedColor = colorCount.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse(null);
+
+        if (mostUsedColor != null) {
+            System.out.println("Most used color (by GRAND_MASTERS): " + mostUsedColor);
+        } else {
+            System.out.println("No GRAND_MASTER jedis on this planet.");
+        }
+    }
+
 
 }

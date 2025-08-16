@@ -133,6 +133,15 @@ public class CommandHandler {
                     System.out.println("Usage: get_youngest_jedi <planet_name> <rank>");
                 }
                 break;
+            case "get_most_used_saber_color":
+                if (parts.length == 3) {
+                    universe.getMostUsedSaberColor(parts[1], parts[2]);
+                } else if (parts.length == 2) {
+                    universe.getMostUsedSaberColorByGrandMasters(parts[1]);
+                } else {
+                    System.out.println("Usage: get_most_used_saber_color <planet_name> [<rank>]");
+                }
+                break;
 
             default:
                 System.out.println("Unknown command. Type 'help' for a list.");
