@@ -3,7 +3,9 @@ package universe;
 import model.Planet;
 import model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class StarWarsUniverse {
@@ -216,6 +218,34 @@ public class StarWarsUniverse {
             System.out.println("No GRAND_MASTER jedis on this planet.");
         }
     }
+    public void printJediByName(String name) {
+        for (Planet planet : planets.values()) {
+            for (Jedi jedi : planet.getJedis()) {
+                if (jedi.getName().equalsIgnoreCase(name)) {
+                    System.out.println(jedi);
+                    System.out.println("Planet: " + planet.getName());
+                    return;
+                }
+            }
+        }
+        System.out.println("Jedi not found.");
+    }
+    public void printMergedPlanets(String planet1Name, String planet2Name) {
+        Planet p1 = planets.get(planet1Name);
+        Planet p2 = planets.get(planet2Name);
 
+        if (p1 == null || p2 == null) {
+            System.out.println("One or both planets not found.");
+            return;
+        }
+
+        List<Jedi> combined = new ArrayList<>();
+        combined.addAll(p1.getJedis());
+        combined.addAll(p2.getJedis());
+
+        combined.stream()
+                .sorted((j1, j2) -> j1.getName().compareToIgnoreCase(j2.getName()))
+                .forEach(System.out::println);
+    }
 
 }

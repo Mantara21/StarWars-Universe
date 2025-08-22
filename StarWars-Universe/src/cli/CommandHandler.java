@@ -29,6 +29,10 @@ public class CommandHandler {
 
     private void handleCommand(String command) {
         String[] parts = command.split(" ");
+        if (parts.length == 3 && parts[1].equals("+")) {
+            universe.printMergedPlanets(parts[0], parts[2]);
+            return;
+        }
         switch (parts[0].toLowerCase()) {
             case "open":
                 if (parts.length >= 2) {
@@ -60,7 +64,7 @@ public class CommandHandler {
                     System.out.println("Usage: add_planet <planet_name>");
                 }
                 break;
-            case "print":
+            case "print_planet":
                 if (parts.length >= 2) {
                     var planet = universe.getPlanet(parts[1]);
                     if (planet != null) {
@@ -140,6 +144,22 @@ public class CommandHandler {
                     universe.getMostUsedSaberColorByGrandMasters(parts[1]);
                 } else {
                     System.out.println("Usage: get_most_used_saber_color <planet_name> [<rank>]");
+                }
+                break;
+            case "print_jedi":
+                if (parts.length == 2) {
+                    if (universe.getPlanet(parts[1]) != null) {
+                        // вече съществуващото поведение за print <planet>
+                        var planet = universe.getPlanet(parts[1]);
+                        System.out.println("Planet: " + planet.getName());
+                        for (var jedi : planet.getSortedJedis()) {
+                            System.out.println(jedi);
+                        }
+                    } else {
+                        universe.printJediByName(parts[1]);
+                    }
+                } else {
+                    System.out.println("Usage: print <planet_name> OR print <jedi_name>");
                 }
                 break;
 
